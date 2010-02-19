@@ -16,9 +16,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# Uses pear provider from http://projects.reductivelabs.com/issues/1823
+# http://www.mit.edu/~marthag/puppet/pear.rb
 class pear {
   # TODO:
-  # - http://www.mit.edu/~marthag/puppet/pear.rb
   # - pecl install uploadprogress
   # - file /etc/php5/apache2/conf.d/uploadprogress.ini with content
   #   extension=uploadprogress.so
