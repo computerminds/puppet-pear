@@ -41,7 +41,7 @@ class pear {
     ensure  => present,
     owner   => root,
     group   => root,
-    moder   => 0644,
+    mode    => 0644,
     content => "extension=uploadprogress.so\n",
     require => Package["uploadprogress"],
   }
