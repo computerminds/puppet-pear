@@ -17,21 +17,32 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Uses pear provider from http://projects.reductivelabs.com/issues/1823
-# http://www.mit.edu/~marthag/puppet/pear.rb
+#                         http://www.mit.edu/~marthag/puppet/pear.rb
+# Uses pecl provider from http://projects.reductivelabs.com/issues/2926
+#                         http://web.mit.edu/~marthag/www/puppet/pecl.rb
 class pear {
-  # TODO:
-  # - pecl install uploadprogress
-  # - file /etc/php5/apache2/conf.d/uploadprogress.ini with content
-  #   extension=uploadprogress.so
-  
-  # Pear
-  package { "php-pear":
-      ensure  => installed,
-      require => Package["php5-dev"],
-  }
-
   # Provides "phpize" command for pear
   package { "php5-dev":
-      ensure => installed,
+    ensure => installed,
+  }
+
+  # Pear
+  package { "php-pear":
+    ensure  => installed,
+    require => Package["php5-dev"],
+  }
+
+  package { "uploadprogress":
+    ensure   => installed,
+    provider => pecl,
+  } 
+
+  file { "/etc/php5/apache2/conf.d/uploadprogress.ini":
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    moder   => 0644,
+    content => "extension=uploadprogress.so\n",
+    require => Package["uploadprogress"],
   }
 }
