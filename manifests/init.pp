@@ -26,10 +26,17 @@ class pear {
     ensure => installed,
   }
 
+  # Make is a pear dependency
+  if !defined(Package['make']) {
+    package { "make":
+      ensure => installed,
+    }
+  }
+
   # Pear
   package { "php-pear":
     ensure  => installed,
-    require => Package["php5-dev"],
+    require => Package["php5-dev"], Package["make"],
   }
 
   package { "uploadprogress":
