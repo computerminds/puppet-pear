@@ -36,7 +36,7 @@ class pear {
   # Pear
   package { "php-pear":
     ensure  => installed,
-    require => Package["php5-dev"], Package["make"],
+    require => Package["php5-dev", "make"],
   }
 
   package { "uploadprogress":
